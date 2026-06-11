@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoiceType – Text to Speech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <main class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="10" fill="url(#logoGrad)"/>
+          <path d="M10 22 L10 10 M14 20 L14 8 M18 23 L18 9 M22 21 L22 11" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF"/>
+              <stop offset="1" stop-color="#3ECFCF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>VoiceType</span>
+      </div>
+      <p class="tagline">Type anything. Hear it instantly.</p>
+    </header>
+
+    <!-- Card -->
+    <section class="card">
+
+      <!-- Waveform visualizer -->
+      <div class="waveform-wrap" id="waveformWrap" aria-hidden="true">
+        <div class="waveform" id="waveform">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <p class="waveform-label" id="waveformLabel">Idle</p>
+      </div>
+
+      <!-- Textarea -->
+      <div class="field">
+        <label class="field-label" for="inputText">
+          Your text
+          <span class="char-count" id="charCount">0 / 500</span>
+        </label>
+        <textarea
+          id="inputText"
+          class="textarea"
+          placeholder="Type or paste a sentence here…"
+          maxlength="500"
+          rows="4"
+          spellcheck="true"
+          aria-describedby="charCount"
+        ></textarea>
+      </div>
+
+      <!-- Speak button -->
+      <button class="btn-speak" id="speakBtn" aria-live="polite">
+        <svg class="btn-icon" id="btnIcon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <polygon points="5,3 19,12 5,21" fill="currentColor"/>
+        </svg>
+        <span id="btnLabel">Speak</span>
+      </button>
+
+      <!-- Status / error -->
+      <div class="status" id="statusMsg" role="status" aria-live="polite"></div>
+
+      <!-- Audio player -->
+      <div class="player" id="playerWrap" hidden>
+        <audio id="audioPlayer" controls preload="auto" aria-label="Generated speech audio"></audio>
+        <div class="player-meta" id="playerMeta"></div>
+      </div>
+
+    </section>
+
+    <!-- History -->
+    <section class="history-section" id="historySection" hidden>
+      <h2 class="history-title">Recent</h2>
+      <ul class="history-list" id="historyList"></ul>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

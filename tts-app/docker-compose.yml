@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+
+  # ── Backend: Express + gTTS ──────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: tts-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+    ports:
+      - "5000:5000"        # expose directly for local dev / API testing
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:5000/health', r => process.exit(r.statusCode === 200 ? 0 : 1))"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+    networks:
+      - tts-net
+
+  # ── Frontend: React/static + Nginx ───────────────────────────────────────────
+  frontend:
+    build:
+      context: ./src/frontend
+      dockerfile: Dockerfile
+    container_name: tts-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"          # app available at http://localhost:3000
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - tts-net
+
+networks:
+  tts-net:
+    driver: bridge
