@@ -10,7 +10,7 @@ frontend:
 
   service:
     name: frontend-service
-    type: NodePort
+    type: LoadBalancer
     port: 80
     targetPort: 80
     # Leave null to let Kubernetes assign a free NodePort.
@@ -32,7 +32,7 @@ backend:
   service:
     # Keep this as "backend" if the frontend uses this hostname internally.
     name: backend
-    type: NodePort
+    type: LoadBalancer
     port: 5000
     targetPort: 5000
     # Leave null to let Kubernetes assign a free NodePort.
