@@ -2,7 +2,7 @@
   "use strict";
 
   // ── Config ────────────────────────────────────────────────────────────────────
-  const API_BASE = window.ENV_API_URL || "http://localhost:5000";
+  const API_BASE = "";
   const MAX_CHARS = 500;
   const MAX_HISTORY = 5;
 
