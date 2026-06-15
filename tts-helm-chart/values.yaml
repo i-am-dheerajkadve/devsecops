@@ -1,0 +1,45 @@
+frontend:
+  replicaCount: 1
+
+  image:
+    repository: dheerajkadve/tts-frontend
+    tag: latest
+    pullPolicy: Always
+
+  containerPort: 80
+
+  service:
+    name: frontend-service
+    type: NodePort
+    port: 80
+    targetPort: 80
+    # Leave null to let Kubernetes assign a free NodePort.
+    nodePort: null
+
+  env: []
+  resources: {}
+
+backend:
+  replicaCount: 2
+
+  image:
+    repository: dheerajkadve/tts-backend
+    tag: latest
+    pullPolicy: Always
+
+  containerPort: 5000
+
+  service:
+    # Keep this as "backend" if the frontend uses this hostname internally.
+    name: backend
+    type: NodePort
+    port: 5000
+    targetPort: 5000
+    # Leave null to let Kubernetes assign a free NodePort.
+    nodePort: null
+
+  env: []
+  resources: {}
+
+imagePullSecrets: []
+

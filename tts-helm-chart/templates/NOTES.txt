@@ -1,0 +1,11 @@
+TTS application installed in namespace {{ .Release.Namespace }}.
+
+Check the resources:
+  kubectl get pods,svc -n {{ .Release.Namespace }}
+
+Access the frontend with port-forwarding:
+  kubectl port-forward -n {{ .Release.Namespace }} svc/{{ .Values.frontend.service.name }} 8080:{{ .Values.frontend.service.port }}
+
+Then open:
+  http://localhost:8080
+
